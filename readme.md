@@ -1,0 +1,1 @@
+# Bot Scrap Quotes
