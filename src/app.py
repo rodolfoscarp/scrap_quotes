@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 from src.services import DBServices, APIServices
 from src.logs import setup_logs
+from loguru import logger
 
 
 def start_app():
@@ -17,6 +18,9 @@ def start_app():
     bot = QuotesBot(PAGES, HEADLESS)
     bot.processar()
 
+    logger.info("Salvando registros no banco e API.")
+
     for quote in bot.quotes:
+        logger.debug("Salvando regitros: {} - {}", quote.autor, quote.text)
         DBServices.save(quote.autor, quote.text, quote.tags)
         APIServices.create(APIURL, quote.autor, quote.text, quote.tags)

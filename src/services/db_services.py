@@ -7,7 +7,6 @@ class DBServices:
 
     @staticmethod
     def save(autor: str, text: str, tags: list[str]):
-        logger.debug("Salvando regitros: {} - {}", autor, text)
         try:
             with db.atomic():
                 autor_instance, _ = Autor.get_or_create(name=autor)
@@ -20,5 +19,6 @@ class DBServices:
                     if new:
                         quote_instance.tags.add(tag)
 
-        except IntegrityError as e:
+            logger.debug("Registro salvo/atualizado com sucesso.")
+        except Exception as e:
             logger.exception(e)
