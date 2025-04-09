@@ -21,7 +21,7 @@ O projeto faz acesso a [página](https://quotes.toscrape.com) e faz a raspagem d
   - `APIURL`: A URL POST para envio dos dados.
   - `HEADLESS`: Executar o navegador em modo headless
 
-Obs: Utilize a URL: `https://67f67d5c42d6c71cca62461c.mockapi.io/api/quotes` para testes.
+Obs: Utilize a URL: `https://my-json-server.typicode.com/rodolfoscarp/scrap_quotes_dummy_api/quotes` para testes.
 
 ### Execução Local
 
