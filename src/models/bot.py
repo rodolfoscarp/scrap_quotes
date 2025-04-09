@@ -6,13 +6,15 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from src.models.quote import Quote
 from loguru import logger
+from selenium.webdriver.chrome.options import Options
 
 
 class QuotesBot:
 
-    def __init__(self, pages: int):
+    def __init__(self, pages: int, headless: bool = False):
 
         self._pages = pages
+        self._headless = headless
         self._quotes: list[Quote] = []
         self._setup()
 
@@ -20,8 +22,16 @@ class QuotesBot:
 
     def _setup(self):
         chromedriver_autoinstaller.install()
-        self._driver = Chrome()
-        self._driver.maximize_window()
+
+        # modo headless
+        options = Options()
+
+        if self._headless:
+            options.add_argument("--headless=new")
+            options.add_argument("--no-sandbox")
+            options.add_argument("--disable-dev-shm-usage")
+
+        self._driver = Chrome(options=options)
 
     def _scrap_page(self):
         quote_list = WebDriverWait(self._driver, 20).until(

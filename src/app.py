@@ -12,8 +12,9 @@ def start_app():
 
     PAGES = int(os.environ.get("PAGES", 3))
     APIURL = os.environ.get("APIURL")
+    HEADLESS = bool(int(os.environ.get("HEADLESS", 1)))
 
-    bot = QuotesBot(PAGES)
+    bot = QuotesBot(PAGES, HEADLESS)
     bot.processar()
 
     for quote in bot.quotes:
