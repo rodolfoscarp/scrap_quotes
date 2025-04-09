@@ -1,5 +1,6 @@
 from peewee import IntegrityError
 from src.db import db, Autor, Tag, Quote
+from loguru import logger
 
 
 class DBServices:
@@ -18,5 +19,6 @@ class DBServices:
                     if new:
                         quote_instance.tags.add(tag)
 
-        except IntegrityError as e:
-            print(f"Erro de integridade: {e}")
+            logger.debug("Registro salvo/atualizado com sucesso.")
+        except Exception as e:
+            logger.exception(e)
