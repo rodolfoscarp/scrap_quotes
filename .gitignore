@@ -17,3 +17,6 @@ dev/
 
 # database
 database.db
+
+# logs
+logs.log

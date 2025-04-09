@@ -2,12 +2,13 @@ from src.models.bot import QuotesBot
 from dotenv import load_dotenv
 import os
 from src.services.db_services import DBServices
-
-
-load_dotenv()
+from src.logs import setup_logs
 
 
 def start_app():
+
+    setup_logs()
+    load_dotenv()
 
     PAGES = int(os.environ.get("PAGES", 3))
 

@@ -5,6 +5,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from src.models.quote import Quote
+from loguru import logger
 
 
 class QuotesBot:
@@ -40,10 +41,13 @@ class QuotesBot:
         self._driver.find_element(By.CSS_SELECTOR, "li.next > a").click()
 
     def processar(self):
+        logger.info("Iniciando raspagem...")
         self._driver.get(self._url)
 
         for index, _ in enumerate(range(self._pages), start=1):
+            logger.info("Raspando página {}", index)
             self._scrap_page()
+            logger.info("Total registros raspados: {}.", len(self._quotes))
 
         self._driver.quit()
 
