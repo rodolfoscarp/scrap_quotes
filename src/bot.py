@@ -16,7 +16,9 @@ class Quote:
 
 class QuotesBot:
 
-    def __init__(self):
+    def __init__(self, pages: int):
+
+        self._pages = pages
         self._quotes: list[Quote] = []
         self._setup()
 
@@ -37,7 +39,7 @@ class QuotesBot:
             autor = quote.find_element(By.CSS_SELECTOR, ".author")
             tags = quote.find_elements(By.CSS_SELECTOR, ".tag")
 
-            quote = Quote(text.text, autor.text)
+            quote = Quote(text.text[1:-1], autor.text)
             quote.tags = [tag.text for tag in tags]
 
             self._quotes.append(quote)
@@ -47,7 +49,7 @@ class QuotesBot:
     def processar(self):
         self._driver.get(self._url)
 
-        for page in range(3):
+        for index, _ in enumerate(range(self._pages), start=1):
             self._scrap_page()
 
         self._driver.quit()
