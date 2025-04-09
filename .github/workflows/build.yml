@@ -1,0 +1,33 @@
+name: Build Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  name: scrap_quotes
+
+jobs:
+  build-windows:
+    runs-on: windows-2019
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - name: Install requeriments
+        run: |
+          pip install -r requirements.txt
+      - name: Run Pyinstaller
+        run: |
+          set PYTHONOPTIMIZE=2 && pyinstaller ${{ env.name }}.spec
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.name }}
+          path: |
+            dist/${{ env.name }}
