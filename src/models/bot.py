@@ -4,14 +4,7 @@ import chromedriver_autoinstaller
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from dataclasses import dataclass, field
-
-
-@dataclass
-class Quote:
-    text: str
-    autor: str
-    tags: list[str] = field(default_factory=list)
+from src.models.quote import Quote
 
 
 class QuotesBot:

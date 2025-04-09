@@ -7,7 +7,6 @@ dist/
 
 # PyInstaller
 *.manifest
-*.spec
 
 # Environments
 .env
@@ -15,3 +14,6 @@ venv/
 
 # dev
 dev/
+
+# database
+database.db
